@@ -20,34 +20,28 @@
     var CONFIG = {"hostname":"wang_chi_jie.gitee.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="变形虫碰撞(点击可以跳转)12345678910111213141516171819202122232425262728293031import java.text.DecimalFormat;import java.util.Arrays;import java.util.Scanner;public class Main &amp;#123;    public static void main(St">
-<meta property="og:type" content="article">
-<meta property="og:title" content="190709贪婪算法练习">
-<meta property="og:url" content="https://wang_chi_jie.gitee.io/2020/09/11/190709%20%E8%B4%AA%E5%A9%AA%E7%AE%97%E6%B3%95/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://wang_chi_jie.gitee.io/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="变形虫碰撞(点击可以跳转)12345678910111213141516171819202122232425262728293031import java.text.DecimalFormat;import java.util.Arrays;import java.util.Scanner;public class Main &amp;#123;    public static void main(St">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-11T13:24:28.581Z">
-<meta property="article:modified_time" content="2020-06-07T11:31:06.428Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="算法">
-<meta property="article:tag" content="练习">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://wang_chi_jie.gitee.io/2020/09/11/190709%20%E8%B4%AA%E5%A9%AA%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="https://wang_chi_jie.gitee.io/page/2/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : false,
-    isPost : true,
+    isHome : true,
+    isPost : false,
     lang   : 'en'
   };
 </script>
 
-  <title>190709贪婪算法练习 | Hexo</title>
+  <title>Hexo</title>
   
 
 
@@ -145,10 +139,9 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content index posts-expand">
             
-
-    
+      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -164,9 +157,10 @@
       <meta itemprop="name" content="Hexo">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          190709贪婪算法练习
-        </h1>
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/11/190709%20%E8%B4%AA%E5%A9%AA%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">190709贪婪算法练习</a>
+        </h2>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -196,43 +190,250 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h4 id="变形虫碰撞-点击可以跳转"><a href="#变形虫碰撞-点击可以跳转" class="headerlink" title="变形虫碰撞(点击可以跳转)"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/309669#problem/C">变形虫碰撞(点击可以跳转)</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import java.text.DecimalFormat;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;读取键盘输入</span><br><span class="line">        Scanner scan &#x3D; new Scanner(System.in);</span><br><span class="line">        int num &#x3D; scan.nextInt();</span><br><span class="line">        double[] weight &#x3D; new double[num];</span><br><span class="line">        for(int i&#x3D;0;i&lt;num;i++)&#123;</span><br><span class="line">            weight[i] &#x3D; scan.nextDouble();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;小到大排序</span><br><span class="line">        Arrays.sort(weight);</span><br><span class="line">        double SumWeight&#x3D;weight[weight.length-1];</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;计算几何平均值</span><br><span class="line">        for(int i &#x3D; num-1;i&gt;0;i--)&#123;</span><br><span class="line">            double sqrt &#x3D; Math.sqrt(SumWeight*weight[i-1]);</span><br><span class="line">            SumWeight&#x3D;2 * sqrt;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;格式化输出</span><br><span class="line">        String parten &#x3D; &quot;#0.000&quot;;</span><br><span class="line">        DecimalFormat decimal &#x3D; new DecimalFormat(parten);</span><br><span class="line">        String reweight &#x3D; decimal.format(SumWeight);</span><br><span class="line">        System.out.println(reweight);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h4 id="变形虫碰撞-点击可以跳转"><a href="#变形虫碰撞-点击可以跳转" class="headerlink" title="变形虫碰撞(点击可以跳转)"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/309669#problem/C">变形虫碰撞(点击可以跳转)</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import java.text.DecimalFormat;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;读取键盘输入</span><br><span class="line">        Scanner scan &#x3D; new Scanner(System.in);</span><br><span class="line">        int num &#x3D; scan.nextInt();</span><br><span class="line">        double[] weight &#x3D; new double[num];</span><br><span class="line">        for(int i&#x3D;0;i&lt;num;i++)&#123;</span><br><span class="line">            weight[i] &#x3D; scan.nextDouble();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;小到大排序</span><br><span class="line">        Arrays.sort(weight);</span><br><span class="line">        double SumWeight&#x3D;weight[weight.length-1];</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;计算几何平均值</span><br><span class="line">        for(int i &#x3D; num-1;i&gt;0;i--)&#123;</span><br><span class="line">            double sqrt &#x3D; Math.sqrt(SumWeight*weight[i-1]);</span><br><span class="line">            SumWeight&#x3D;2 * sqrt;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;格式化输出</span><br><span class="line">        String parten &#x3D; &quot;#0.000&quot;;</span><br><span class="line">        DecimalFormat decimal &#x3D; new DecimalFormat(parten);</span><br><span class="line">        String reweight &#x3D; decimal.format(SumWeight);</span><br><span class="line">        System.out.println(reweight);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="电话号码减法游戏"><a href="#电话号码减法游戏" class="headerlink" title="电话号码减法游戏"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/309669#problem/D">电话号码减法游戏</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Scanner scan &#x3D; new Scanner(System.in);</span><br><span class="line">        int length &#x3D; scan.nextInt();</span><br><span class="line">        int num8 &#x3D; 0;</span><br><span class="line">        int numOther &#x3D; 0;</span><br><span class="line"></span><br><span class="line">        String TelPhoNum &#x3D; scan.next().substring(0,length-10);</span><br><span class="line">        char[] charTPN &#x3D; TelPhoNum.toCharArray();</span><br><span class="line">        for (char a: charTPN) &#123;</span><br><span class="line">            String n &#x3D; a+&quot;&quot;;</span><br><span class="line">            int b &#x3D; Integer.parseInt(n);</span><br><span class="line">            if(b&#x3D;&#x3D;8)&#123;</span><br><span class="line">                num8++;</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                numOther++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(num8&gt;numOther)&#123;</span><br><span class="line">            System.out.println(&quot;Yes&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            System.out.println(&quot;No&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h4 id="农场主安排奶牛工作"><a href="#农场主安排奶牛工作" class="headerlink" title="农场主安排奶牛工作"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/309669#problem/B">农场主安排奶牛工作</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> cowNumber = scan.nextInt();</span><br><span class="line">        <span class="keyword">int</span> end=scan.nextInt();</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;Cow&gt; cow = <span class="keyword">new</span> ArrayList&lt;Cow&gt;(cowNumber);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cowNumber;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> a = scan.nextInt();</span><br><span class="line">            <span class="keyword">int</span> b = scan.nextInt();</span><br><span class="line">            Cow newcow = <span class="keyword">new</span> Cow(a,b);</span><br><span class="line">            cow.add(newcow);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> workCowNum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> worktime=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> workstart = cow.get(<span class="number">0</span>).start;</span><br><span class="line">        <span class="keyword">int</span> workend = cow.get(<span class="number">0</span>).end;</span><br><span class="line">        <span class="keyword">boolean</span> iswork=<span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> isend=<span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cow.size();i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;cow.size();j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(cow.get(j).end&gt;=end)&#123;</span><br><span class="line">                    i=j;</span><br><span class="line">                    iswork = <span class="keyword">true</span>;</span><br><span class="line">                    isend = <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(workstart&lt;=cow.get(j).start&amp;&amp;workend&gt;=cow.get(j).end)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(worktime&lt;=cow.get(j).end-workend) &#123;</span><br><span class="line">                        iswork=<span class="keyword">true</span>;</span><br><span class="line">                        i=j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(iswork)&#123;</span><br><span class="line">                workstart = workend;</span><br><span class="line">                workend = cow.get(i).end;</span><br><span class="line">                worktime = cow.get(i).end - workend;</span><br><span class="line">                workCowNum++;</span><br><span class="line">                iswork = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(isend)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(workCowNum+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cow</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> start;</span><br><span class="line">    <span class="keyword">int</span> end;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Cow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.start = a;</span><br><span class="line">        <span class="keyword">this</span>.end = b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+      
     </div>
 
     
     
     
-
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
-              <a href="/tags/%E7%BB%83%E4%B9%A0/" rel="tag"># 练习</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/09/11/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/09/11/blogSetup/" rel="next" title="">
-       <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
+        <div class="post-eof"></div>
       </footer>
-    
   </article>
   
   
   
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wang_chi_jie.gitee.io/2020/09/11/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/11/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-11 19:06:25" itemprop="dateCreated datePublished" datetime="2020-09-11T19:06:25+08:00">2020-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-06-07 08:30:08" itemprop="dateModified" datetime="2020-06-07T08:30:08+08:00">2020-06-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wang_chi_jie.gitee.io/2020/06/08/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E4%B8%8A%E4%BC%A0%E5%90%8E404%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/08/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E4%B8%8A%E4%BC%A0%E5%90%8E404%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">解决hexo上传github后404的问题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-08 10:53:17 / Modified: 10:59:45" itemprop="dateCreated datePublished" datetime="2020-06-08T10:53:17+08:00">2020-06-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><img src="C:\Users\王二蛋\AppData\Roaming\Typora\typora-user-images\image-20200608105609373.png" alt="image-20200608105609373"></p>
+<h6 id="如果你发现你hexo博客本地完全正常，但是上传之后发现404，无论你的项目名字是不是username-github-io-都到setting里面点击一下这个按钮。"><a href="#如果你发现你hexo博客本地完全正常，但是上传之后发现404，无论你的项目名字是不是username-github-io-都到setting里面点击一下这个按钮。" class="headerlink" title="如果你发现你hexo博客本地完全正常，但是上传之后发现404，无论你的项目名字是不是username.github.io,都到setting里面点击一下这个按钮。"></a>如果你发现你hexo博客本地完全正常，但是上传之后发现404，无论你的项目名字是不是username.github.io,都到setting里面点击一下这个按钮。</h6>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://wang_chi_jie.gitee.io/2020/06/07/tomcat%E5%88%9D%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/07/tomcat%E5%88%9D%E8%AF%95/" class="post-title-link" itemprop="url">tomcat初试</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-06-07 19:39:58 / Modified: 19:41:26" itemprop="dateCreated datePublished" datetime="2020-06-07T19:39:58+08:00">2020-06-07</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><ul>
+<li>一款<code>开源免费</code>的中小型服务器软件</li>
+</ul>
+<ol>
+<li><h3 id="下载：单击打开下载页面选择适合自己的版本"><a href="#下载：单击打开下载页面选择适合自己的版本" class="headerlink" title="下载：单击打开下载页面选择适合自己的版本"></a><a target="_blank" rel="noopener" href="https://tomcat.apache.org/">下载</a>：单击打开下载页面选择适合自己的版本</h3><img src="https://upload-images.jianshu.io/upload_images/22266215-ebff12206c68c0b4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ApacheTomcat官网.jpg"><br><img src="https://upload-images.jianshu.io/upload_images/22266215-8b40fc67357f7e06.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="下载界面.jpg"></li>
+<li><h3 id="安装：解压即可注意：安装目录不要包含空格和中文"><a href="#安装：解压即可注意：安装目录不要包含空格和中文" class="headerlink" title="安装：解压即可注意：安装目录不要包含空格和中文"></a>安装：解压即可<code>注意：安装目录不要包含空格和中文</code></h3></li>
+<li><h3 id="卸载：删除安装目录"><a href="#卸载：删除安装目录" class="headerlink" title="卸载：删除安装目录"></a>卸载：删除安装目录</h3></li>
+<li><h3 id="打开："><a href="#打开：" class="headerlink" title="打开："></a>打开：</h3></li>
+</ol>
+<ul>
+<li>打开软件：找到<code>\bin\startup.bat</code>双击打开<code>注意：不要关掉</code></li>
+<li><a target="_blank" rel="noopener" href="http://localhost:8080/">访问</a>：浏览器地址栏输入<code>http://localhost:8080</code><br><img src="https://upload-images.jianshu.io/upload_images/22266215-bf4d12f722cbd4bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="已经更改过端口号为80，所以localhost后面不用跟8080，详情百度如何更改Tomcat端口号"></li>
+</ul>
+<ol start="5">
+<li><h3 id="关闭：找到-bin-shutdown-bat双击打开或在启动窗口ctrl-c"><a href="#关闭：找到-bin-shutdown-bat双击打开或在启动窗口ctrl-c" class="headerlink" title="关闭：找到\bin\shutdown.bat双击打开或在启动窗口ctrl+c"></a>关闭：找到<code>\bin\shutdown.bat</code>双击打开或在启动窗口<code>ctrl+c</code></h3></li>
+<li><h3 id="配置：三种方法"><a href="#配置：三种方法" class="headerlink" title="配置：三种方法"></a>配置：<code>三种方法</code></h3></li>
+</ol>
+<ul>
+<li>将项目打包成war压缩包，然后放到<code>webapps</code>目录下<br><img src="https://upload-images.jianshu.io/upload_images/22266215-c7a7be671e660f4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+<li>在<code>\conf</code>中找到<code>server.xml</code>找到<code>&lt;Host&gt;</code>标签，然后添加以下代码<br><img src="https://upload-images.jianshu.io/upload_images/22266215-f678747a3d316166.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context docBase&#x3D;&quot;E:\hello&quot; path&#x3D;&quot;&#x2F;virture&quot; &gt;</span><br><span class="line">&lt;!--docbase：文件所在的位置  path：虚拟文件夹位置--&gt;</span><br></pre></td></tr></table></figure>
+<img src="https://upload-images.jianshu.io/upload_images/22266215-917104cd0986a589.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="server.xml"><br><img src="https://upload-images.jianshu.io/upload_images/22266215-d88f04898b8414ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="然后重启Tomcat，使配置文件生效，即可如上图"></li>
+</ul>
+<ul>
+<li>在<code>\conf\Catalina</code>中新建xml配置文件，然后在空白文件中添加以下内容,该项目的虚拟路径名就是xml的文件名<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context docBase&#x3D;&quot;E:\hello&quot;&gt;</span><br></pre></td></tr></table></figure>
+<img src="https://upload-images.jianshu.io/upload_images/22266215-8cc4eb670f69b5f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="效果如上"></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 
@@ -284,7 +485,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%98%E5%BD%A2%E8%99%AB%E7%A2%B0%E6%92%9E-%E7%82%B9%E5%87%BB%E5%8F%AF%E4%BB%A5%E8%B7%B3%E8%BD%AC"><span class="nav-number">1.</span> <span class="nav-text">变形虫碰撞(点击可以跳转)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E5%87%8F%E6%B3%95%E6%B8%B8%E6%88%8F"><span class="nav-number">2.</span> <span class="nav-text">电话号码减法游戏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%86%9C%E5%9C%BA%E4%B8%BB%E5%AE%89%E6%8E%92%E5%A5%B6%E7%89%9B%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">农场主安排奶牛工作</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

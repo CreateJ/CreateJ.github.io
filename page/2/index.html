@@ -758,7 +758,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>本博客架构hexo+gitee page</p>
+          <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>现在各个博客平台，要么免费有广告，要么就收费，让喜欢当白嫖党的我们烦躁不已。所以，想不想拥有一个炫酷的个人博客来展示自己呢？本文将为你介绍如何从头搭建一个hexo个人博客（完全免费的噢！）。</p>
+<p>博客架构： hexo+gitee page/github page</p>
 <h1 id="1-工具准备"><a href="#1-工具准备" class="headerlink" title="1.工具准备"></a>1.工具准备</h1><h2 id="1-下载Git"><a href="#1-下载Git" class="headerlink" title="1.下载Git"></a>1.下载Git</h2><p>下载<a target="_blank" rel="noopener" href="https://gitforwindows.org/">Git</a>,安装一路next</p>
 <h2 id="2-下载Node-js"><a href="#2-下载Node-js" class="headerlink" title="2.下载Node.js"></a>2.下载Node.js</h2><p>下载<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">Node.js</a>,安装一路next</p>
 <h2 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 安装指令</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line">&#x2F;&#x2F; 检验指令</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
@@ -774,34 +775,54 @@
 <h2 id="4-重新渲染"><a href="#4-重新渲染" class="headerlink" title="4.重新渲染"></a>4.重新渲染</h2><p>在我们对hexo的配置或者是内容修改后，都需要进行重新构建，这两个命令会经常用到</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
 
-<h1 id="3-同步到gitee"><a href="#3-同步到gitee" class="headerlink" title="3.同步到gitee"></a>3.同步到gitee</h1><h2 id="1-注册账号"><a href="#1-注册账号" class="headerlink" title="1.注册账号"></a>1.注册账号</h2><p>自己操作</p>
-<h2 id="2-创建仓库"><a href="#2-创建仓库" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h2><h3 id="1-找到自己的id"><a href="#1-找到自己的id" class="headerlink" title="1.找到自己的id"></a>1.找到自己的id</h3><p>查看自己的地址栏，gitee.com后面带的就是你的id了</p>
+<h1 id="3-同步到gitee和github"><a href="#3-同步到gitee和github" class="headerlink" title="3.同步到gitee和github"></a>3.同步到gitee和github</h1><h2 id="1-gitee"><a href="#1-gitee" class="headerlink" title="1.gitee"></a>1.gitee</h2><h3 id="1-注册账号"><a href="#1-注册账号" class="headerlink" title="1.注册账号"></a>1.注册账号</h3><p>自己操作</p>
+<h3 id="2-创建仓库"><a href="#2-创建仓库" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h3><h4 id="1-找到自己的id"><a href="#1-找到自己的id" class="headerlink" title="1.找到自己的id"></a>1.找到自己的id</h4><p>查看自己的地址栏，gitee.com后面带的就是你的id了</p>
 <p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912103726726.png" alt="image-20200912103726726"></p>
 <p>tips：可以给自己起一个好听的英文名字，然后在个人信息中替换掉，以后你把网站给别人的时候，别人看到你的网站名字才足够优雅！</p>
-<h3 id="2-创建仓库-1"><a href="#2-创建仓库-1" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h3><p>右上角加号创建仓库</p>
+<h4 id="2-创建仓库-1"><a href="#2-创建仓库-1" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h4><p>右上角加号创建仓库</p>
 <p>仓库名字就填你的id，一摸一样就可以</p>
 <p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912103936682.png" alt="image-20200912103936682"></p>
 <p>因为我已经创建过了，所以存在，下方的选项自己看情况勾选</p>
-<h2 id="3-同步"><a href="#3-同步" class="headerlink" title="3.同步"></a>3.同步</h2><h3 id="1-复制仓库地址"><a href="#1-复制仓库地址" class="headerlink" title="1.复制仓库地址"></a>1.复制仓库地址</h3><p>复制仓库地址</p>
+<h3 id="3-同步"><a href="#3-同步" class="headerlink" title="3.同步"></a>3.同步</h3><h4 id="1-复制仓库地址"><a href="#1-复制仓库地址" class="headerlink" title="1.复制仓库地址"></a>1.复制仓库地址</h4><p>复制仓库地址</p>
 <p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912104143145.png" alt="image-20200912104143145"></p>
 <p>打开你刚刚创建hexo的地方，找到<strong>_config.yml</strong>这个文件，使用记事本或者说<strong>sublime</strong>打开</p>
 <p>拉到最下面，将仓库地址填入repo关键字后面，注意冒号后面有一个空格，其余两个关键字跟我一样</p>
 <p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912104439210.png" alt="image-20200912104439210"></p>
 <p>然后ctrl+F找到url，填写将来你生成出来的网站地址<strong><a target="_blank" rel="noopener" href="https://yourid.gitee.io/">https://yourId.gitee.io</a></strong>, 只有严格按照上面仓库命名才可以噢！</p>
 <p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912111517557.png" alt="image-20200912111517557"></p>
-<h3 id="2-同步"><a href="#2-同步" class="headerlink" title="2.同步"></a>2.同步</h3><p>使用前面说的重新构建的命令</p>
+<h4 id="2-同步"><a href="#2-同步" class="headerlink" title="2.同步"></a>2.同步</h4><p>使用前面说的重新构建的命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
 
 <p>这个时候会要求你输入gitee的账号密码，输入之后即可上传到你所创建的仓库内</p>
 <p>配置<strong>ssh密钥</strong>可以免密码输入，具体百度，本文不过多介绍</p>
-<h3 id="3-部署Gitee-Pages"><a href="#3-部署Gitee-Pages" class="headerlink" title="3.部署Gitee Pages"></a>3.部署Gitee Pages</h3><p>点击</p>
+<h4 id="3-部署Gitee-Pages"><a href="#3-部署Gitee-Pages" class="headerlink" title="3.部署Gitee Pages"></a>3.部署Gitee Pages</h4><p>点击</p>
 <p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912105353806.png" alt="image-20200912105353806"></p>
 <p>勾选强制使用https</p>
 <p>点击<strong>部署or更新</strong></p>
 <p>注意，以后每一次上传完文章都要来这里点击更新（这个是相对于github不好的地方，可是谁叫它加载快呢！只能是含泪接受它的缺点了）</p>
-<h1 id="3-开始体验"><a href="#3-开始体验" class="headerlink" title="3.开始体验"></a>3.开始体验</h1><p>我们就可以在Gitee Pages页面点击它提供给我们的网址，看到我们的博客啦！</p>
-<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912105655177.png" alt="image-20200912105655177"></p>
-<p>欢迎大家来<a target="_blank" rel="noopener" href="https://jamiew.gitee.io/">我的博客</a>看看噢！使用的是next主题，后面会有教程关于主题配置以及一些细节修改。</p>
+<h3 id="4-体验"><a href="#4-体验" class="headerlink" title="4.体验"></a>4.体验</h3><p>在地址栏输入 yourGiteeName.gitee.io即可访问你的hexo博客啦！</p>
+<h2 id="2-github"><a href="#2-github" class="headerlink" title="2.github"></a>2.github</h2><h3 id="1-注册账号-1"><a href="#1-注册账号-1" class="headerlink" title="1.注册账号"></a>1.注册账号</h3><p>自己操作</p>
+<h3 id="2-创建仓库-2"><a href="#2-创建仓库-2" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h3><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916144148897.png" alt="image-20200916144148897"></p>
+<p>命名要跟自己的用户名一样，才能开启github page，一定要按照这个规则来噢！</p>
+<h3 id="3-同步-1"><a href="#3-同步-1" class="headerlink" title="3.同步"></a>3.同步</h3><h4 id="1-复制仓库地址-1"><a href="#1-复制仓库地址-1" class="headerlink" title="1.复制仓库地址"></a>1.复制仓库地址</h4><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916144315546.png" alt="image-20200916144315546"></p>
+<h4 id="2-同步-1"><a href="#2-同步-1" class="headerlink" title="2.同步"></a>2.同步</h4><p>将地址以下图形式粘贴到<strong>_config.yml</strong>文件中，并补充相应的内容</p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916144621858.png" alt="image-20200916144621858"></p>
+<p>然后将<a target="_blank" rel="noopener" href="https://yourgithubname.github.io粘贴到以下位置/">https://yourGithubName.github.io粘贴到以下位置</a></p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916153033453.png" alt="image-20200916153033453"></p>
+<h4 id="3-部署到github-page"><a href="#3-部署到github-page" class="headerlink" title="3.部署到github page"></a>3.部署到github page</h4><p>保存_config.yml文件</p>
+<p>执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<p>部署这一步是github自动的，比gitee要优秀的多</p>
+<h3 id="4-体验-1"><a href="#4-体验-1" class="headerlink" title="4.体验"></a>4.体验</h3><p>这个时候在地址栏输入yourGithubName.github.io即可访问你的hexo博客啦！</p>
+<h1 id="Github-io访问被拒解决方法（逐步更新）"><a href="#Github-io访问被拒解决方法（逐步更新）" class="headerlink" title="Github.io访问被拒解决方法（逐步更新）"></a>Github.io访问被拒解决方法（逐步更新）</h1><h2 id="1-修改host文件"><a href="#1-修改host文件" class="headerlink" title="1.修改host文件"></a>1.修改host文件</h2><p>一般在路径<strong>C:\Windows\System32\drivers\etc</strong>下，正常情况下没办法直接修改host文件，可以复制出来，然后修改完在复制回去，然后确认管理员权限即可</p>
+<h3 id="1-点击这里跳转查看github-com的ip地址"><a href="#1-点击这里跳转查看github-com的ip地址" class="headerlink" title="1.点击这里跳转查看github.com的ip地址"></a>1.<a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/">点击这里</a>跳转查看<strong>github.com</strong>的ip地址</h3><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916145734151.png" alt="image-20200916145734151"></p>
+<h3 id="2-点击这里查看github-global-ssl-fastly-net的ip地址"><a href="#2-点击这里查看github-global-ssl-fastly-net的ip地址" class="headerlink" title="2.点击这里查看github.global.ssl.fastly.net的ip地址"></a>2.<a target="_blank" rel="noopener" href="https://fastly.net.ipaddress.com/github.global.ssl.fastly.net">点击这里</a>查看<strong>github.global.ssl.fastly.net</strong>的ip地址</h3><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916145953466.png" alt="image-20200916145953466"></p>
+<h3 id="3-点击这里查看github-io的ip地址"><a href="#3-点击这里查看github-io的ip地址" class="headerlink" title="3.点击这里查看github.io的ip地址"></a>3.<a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/assets-cdn.github.com">点击这里</a>查看github.io的ip地址</h3><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916150028081.png" alt="image-20200916150028081"></p>
+<p>最后，按照以下格式添加到host文件的最后面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">140.82.114.3 github.com</span><br><span class="line">199.232.69.194 github.global.ssl.fastly.net</span><br><span class="line"></span><br><span class="line">185.199.108.153 github.github.io</span><br><span class="line">185.199.109.153 github.github.io</span><br><span class="line">185.199.110.153 github.github.io</span><br><span class="line">185.199.111.153 github.github.io</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-修改DNS地址"><a href="#2-修改DNS地址" class="headerlink" title="2.修改DNS地址"></a>2.修改DNS地址</h2><p>将ipv4协议的DNS解析地址修改为114.114.114.114</p>
 
       
     </div>
@@ -1117,7 +1138,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

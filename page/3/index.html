@@ -158,6 +158,642 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://createj.github.io/2020/09/12/vue3-%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jamie">
+      <meta itemprop="description" content="一个头秃前端程序员的学习进阶之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time-Traveler">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/12/vue3-%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/" class="post-title-link" itemprop="url">vue3:动态绑定</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-12 13:17:04 / 修改时间：13:17:32" itemprop="dateCreated datePublished" datetime="2020-09-12T13:17:04+08:00">2020-09-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">vue学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-作用"><a href="#1-作用" class="headerlink" title="1.作用"></a>1.作用</h2><p>让标签中无法动态修改的属性可以动态修改</p>
+<h2 id="2-v-bind语法糖"><a href="#2-v-bind语法糖" class="headerlink" title="2.v-bind语法糖"></a>2.v-bind语法糖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v-bind:src&#x3D;&#39;&#39;</span><br><span class="line">:src&#x3D;&#39;&#39;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-基本使用"><a href="#3-基本使用" class="headerlink" title="3.基本使用"></a>3.基本使用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--只有使用v-bind修饰的属性，才是可以动态变化的--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind:src</span>=<span class="string">&quot;imgURL&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--错误写法--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--&lt;img src=&quot;imgURL&quot; alt=&quot;&quot;&gt;--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line"><span class="javascript">      imgURL:<span class="string">&#x27;https://images.pexels.com/photos/163077/&#x27;</span> +</span></span><br><span class="line"><span class="javascript">          <span class="string">&#x27;mario-yoschi-figures-funny-163077.jpeg?&#x27;</span> +</span></span><br><span class="line"><span class="javascript">          <span class="string">&#x27;auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500&#x27;</span>,</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-使用v-bind动态修改class"><a href="#4-使用v-bind动态修改class" class="headerlink" title="4.使用v-bind动态修改class"></a>4.使用v-bind动态修改class</h2><h3 id="1-对象语法"><a href="#1-对象语法" class="headerlink" title="1.对象语法"></a>1.对象语法</h3><p>通过添加<strong>v-bind</strong>并在类名中以对象的形式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>v-bind动态修改类名<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-class">.active</span> &#123;</span></span><br><span class="line">      color: red;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--这里对量里面的格式是&#123;类名1:boolean,类名2:boolean&#125;--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span> <span class="attr">:class</span>=<span class="string">&quot;&#123;active:isActive&#125;&quot;</span>&gt;</span>王二蛋<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--这里对量里面的格式是&#123;类名1:boolean,类名2:boolean&#125;--&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--&lt;h2 class=&#x27;title&#x27; :class=&quot;&#123;active:isActive&#125;&quot;&gt;王二蛋&lt;/h2&gt;--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;change&quot;</span>&gt;</span>切换<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line"><span class="javascript">      isActive: <span class="literal">true</span>,</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line"><span class="javascript">      change: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">this</span>.isActive = !<span class="built_in">this</span>.isActive;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-数组语法"><a href="#2-数组语法" class="headerlink" title="2.数组语法"></a>2.数组语法</h3><p>略微鸡肋，知道有这个东西，以后说不定会用到</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://createj.github.io/2020/09/12/vue2-%E6%8C%87%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jamie">
+      <meta itemprop="description" content="一个头秃前端程序员的学习进阶之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time-Traveler">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/12/vue2-%E6%8C%87%E4%BB%A4/" class="post-title-link" itemprop="url">vue2:指令</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-09-12 13:16:02 / 修改时间：13:16:34" itemprop="dateCreated datePublished" datetime="2020-09-12T13:16:02+08:00">2020-09-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">vue学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-v-for"><a href="#1-v-for" class="headerlink" title="1.v-for"></a>1.v-for</h2><p>自动遍历渲染相对应的数组内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">:key</span>=<span class="string">&quot;item.id&quot;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item,index) in fruit&quot;</span>&gt;</span>&#123;&#123;item.name&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      fruit: [&#123;</span><br><span class="line"><span class="javascript">        name: <span class="string">&#x27;apple&#x27;</span>,</span></span><br><span class="line">        id: 1,</span><br><span class="line">      &#125;,&#123;</span><br><span class="line"><span class="javascript">        name: <span class="string">&#x27;banana&#x27;</span>,</span></span><br><span class="line">        id: 2,</span><br><span class="line">      &#125;,&#123;</span><br><span class="line"><span class="javascript">        name: <span class="string">&#x27;pear&#x27;</span>,</span></span><br><span class="line">        id: 3,</span><br><span class="line">      &#125;]</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>tips</strong>：注意这里记得使用<strong>v-bind：key=’id’**或者</strong>：key=’id’**来提高vue渲染器的性能，但是对于实际开发没有任何影响</p>
+<h2 id="2-v-once"><a href="#2-v-once" class="headerlink" title="2.v-once"></a>2.v-once</h2><p>被修饰的<strong>html</strong>标签中的<strong>mustache</strong>语法不会再因为变量内容修改而被修改，优点是可以提高网页性能</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-once</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--  v-once的作用是让被修饰的标签的mustache语法</span></span><br><span class="line"><span class="comment">  不会因为对象内容被修改而修改--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">&quot;click&quot;</span>&gt;</span>修改<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line"><span class="javascript">      message: <span class="string">&#x27;修改前是阴天&#x27;</span>,</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line"><span class="javascript">      click: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">this</span>.message = <span class="string">&#x27;修改后是晴天&#x27;</span>;</span></span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-v-text和v-html"><a href="#3-v-text和v-html" class="headerlink" title="3.v-text和v-html"></a>3.v-text和v-html</h2><p><strong>v-text</strong>跟原生js的**ele.innerText()**有类似的意思</p>
+<p><strong>v-html</strong>和原生js的**ele.innerHTML()**有类似的意思</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;message&#125;&#125;你好帅！<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-text</span>=<span class="string">&quot;message&quot;</span>&gt;</span>你好帅！<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--v-text不够灵活--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">&quot;url&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line"><span class="javascript">      message: <span class="string">&#x27;你好二蛋！&#x27;</span>,</span></span><br><span class="line"><span class="handlebars"><span class="xml">      url: &#x27;<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>你好二蛋！<span class="tag">&lt;/<span class="name">a</span>&gt;</span>&#x27;</span></span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4-v-pre"><a href="#4-v-pre" class="headerlink" title="4.v-pre"></a>4.v-pre</h2><p>让被修饰的标签中的<strong>mustache</strong>语法失效，从而直接显示双大括号</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-pre</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!--v-pre = prevent：作用是让mustache语法失效--&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      message: 123,</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="5-v-choak（解决闪动问题）"><a href="#5-v-choak（解决闪动问题）" class="headerlink" title="5.v-choak（解决闪动问题）"></a>5.v-choak（解决闪动问题）</h2><p><strong>更推荐使用v-text语法</strong></p>
+<p>vue解析之前，div中有一个属性v-cloak</p>
+<p>vue解析之后，div中的v-cloak属性被删除</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--css部分--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">    <span class="selector-attr">[v-cloak]</span> &#123;</span></span><br><span class="line">      display: none;</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--html部分--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span> <span class="attr">v-cloak</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!--js部分--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">      el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">      data: &#123;</span><br><span class="line"><span class="javascript">        message: <span class="string">&#x27;你好二蛋！&#x27;</span>,</span></span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,2000)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="6-v-show"><a href="#6-v-show" class="headerlink" title="6.v-show"></a>6.v-show</h2><p><strong>决定元素是否显示出来</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;pink box&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;lightBlue box&quot;</span> <span class="attr">v-show</span>=<span class="string">&quot;isShow&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;showHandle&quot;</span>&gt;</span>显示/隐藏<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line"><span class="javascript">      isShow: <span class="literal">true</span>,</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line"><span class="javascript">      showHandle: <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">this</span>.isShow = !<span class="built_in">this</span>.isShow;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="7-v-if-amp-v-else-if-amp-v-else"><a href="#7-v-if-amp-v-else-if-amp-v-else" class="headerlink" title="7.v-if &amp; v-else-if &amp; v-else"></a>7.v-if &amp; v-else-if &amp; v-else</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&quot;msg&gt;90&quot;</span>&gt;</span>优秀<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">&quot;msg&lt;=90&amp;&amp;msg&gt;80&quot;</span>&gt;</span>良好<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else-if</span>=<span class="string">&quot;msg&lt;=80&amp;&amp;msg&gt;70&quot;</span>&gt;</span>及格<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-else</span>=<span class="string">&quot;msg&lt;=70&quot;</span>&gt;</span>不及格<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      msg: 88,</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;&#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>补充</strong>：<strong>v-if</strong>可以和<strong>v-for</strong>一起使用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">&#x27;item === 22&#x27;</span> <span class="attr">v-for</span>=<span class="string">&quot;(item,key,index) in obj&quot;</span>&gt;</span>&#123;&#123;(index + 1) + &#x27;---&#x27; + key + &#x27;: &#x27; + item &#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../js/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    el: <span class="string">&#x27;#app&#x27;</span>,</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      obj: &#123;</span><br><span class="line"><span class="javascript">        name: <span class="string">&#x27;Jamie&#x27;</span>,</span></span><br><span class="line"><span class="javascript">        gender: <span class="string">&#x27;male&#x27;</span>,</span></span><br><span class="line">        age: 22</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;&#125;</span><br><span class="line">  &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>结果只显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3---age: 22</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://createj.github.io/2020/09/12/vue1-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jamie">
+      <meta itemprop="description" content="一个头秃前端程序员的学习进阶之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time-Traveler">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/12/vue1-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">vue1:基础知识</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 13:14:25" itemprop="dateCreated datePublished" datetime="2020-09-12T13:14:25+08:00">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-13 20:28:00" itemprop="dateModified" datetime="2020-09-13T20:28:00+08:00">2020-09-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">vue学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-MVVM"><a href="#1-MVVM" class="headerlink" title="1.MVVM"></a>1.MVVM</h2><p>View：Dom树，可视化的部分</p>
+<p>View-Model：即我们所用的Vue，分为两部分，分别为DomLinsteners和DataBindings</p>
+<ol>
+<li>DomLinstener: View-&gt;Model</li>
+<li>DataBindings: Model-&gt;View</li>
+</ol>
+<p>Model：js代码中自己定义的部分，或者网络上传来的数据</p>
+<h2 id="2-语法糖"><a href="#2-语法糖" class="headerlink" title="2.语法糖"></a>2.语法糖</h2><p>语法糖（Syntactic sugar），也译为糖衣语法，是由英国计算机科学家彼得·约翰·兰达（Peter J. Landin）发明的一个术语，指计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。通常来说使用语法糖能够增加程序的可读性，从而减少程序代码出错的机会。</p>
+<h3 id="Vue中的语法糖"><a href="#Vue中的语法糖" class="headerlink" title="Vue中的语法糖"></a>Vue中的语法糖</h3><h3 id="已知语法糖"><a href="#已知语法糖" class="headerlink" title="已知语法糖"></a>已知语法糖</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v-on:click=<span class="string">&#x27;&#x27;</span></span><br><span class="line">@click=<span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v-bind:src=<span class="string">&#x27;&#x27;</span></span><br><span class="line">:src=<span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Vue的生命周期"><a href="#3-Vue的生命周期" class="headerlink" title="3.Vue的生命周期"></a>3.Vue的生命周期</h2><p> 可以理解为，vue是封装好的，创建的过程中，他会有很多步骤，当你定义了类似于<strong>create</strong>的生命周期函数之后，他会在做完一些我们看不见的操作之后，将这个<strong>function</strong>作为回调函数调用，在源码中是以**callHook(vm,fn())**的形式</p>
+<p>具体流程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">beforeCreate()&#123;&#125;</span><br><span class="line">created()&#123;&#125;</span><br><span class="line">beforeMount()&#123;&#125;</span><br><span class="line">mounted()&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2020/09/12/vue1-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/lifecycle.png" alt="Vue 实例生命周期"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://createj.github.io/2020/09/12/200714%20%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jamie">
+      <meta itemprop="description" content="一个头秃前端程序员的学习进阶之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time-Traveler">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/12/200714%20%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/" class="post-title-link" itemprop="url">200714 三角形最小路径和</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 11:34:16" itemprop="dateCreated datePublished" datetime="2020-09-12T11:34:16+08:00">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-11 23:57:18" itemprop="dateModified" datetime="2020-09-11T23:57:18+08:00">2020-09-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>题目描述：</strong></p>
+<p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。</p>
+<p>相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。</p>
+<p>例如，给定三角形：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">     [2],</span><br><span class="line">    [3,4],</span><br><span class="line">   [6,5,7],</span><br><span class="line">  [4,1,8,3]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>自顶向下的最小路径和为 <code>11</code>（即，<strong>2</strong> + <strong>3</strong> + <strong>5</strong> + <strong>1</strong> = 11）。</p>
+<p><strong>思路：</strong></p>
+<p>自下而上，可以更好的推进最小路径，否则需要多次判断。</p>
+<ol>
+<li>深复制一个与三角形最后一行的数组resArr，用于保存当前的路径权值</li>
+<li>按照顺序计算两个相邻路径长度，取小的与上层路径长度相加并覆盖到resArr中。</li>
+<li>遍历到倒数第二行停止，获取resArr第一个元素，返回</li>
+</ol>
+<p><strong>实现：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> minimumTotal = <span class="function"><span class="keyword">function</span>(<span class="params">triangle</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> resArr = [];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; triangle.length; i++)&#123;</span><br><span class="line">            resArr[i]=triangle[triangle.length<span class="number">-1</span>][i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = triangle.length<span class="number">-1</span>; i &gt; <span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; i; j++)&#123;</span><br><span class="line">                <span class="comment">// 比较当前路径长度，取较小的与上层相加并覆盖</span></span><br><span class="line">                <span class="keyword">if</span> (resArr[j] &lt;= resArr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                    resArr[j] = resArr[j] + triangle[i<span class="number">-1</span>][j];</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    resArr[j] = resArr[j+<span class="number">1</span>] + triangle[i<span class="number">-1</span>][j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> resArr[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://createj.github.io/2020/09/12/190709%20%E8%B4%AA%E5%A9%AA%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jamie">
+      <meta itemprop="description" content="一个头秃前端程序员的学习进阶之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time-Traveler">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/12/190709%20%E8%B4%AA%E5%A9%AA%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">190709 贪婪算法练习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 11:34:16" itemprop="dateCreated datePublished" datetime="2020-09-12T11:34:16+08:00">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-11 23:58:29" itemprop="dateModified" datetime="2020-09-11T23:58:29+08:00">2020-09-11</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="变形虫碰撞-点击可以跳转"><a href="#变形虫碰撞-点击可以跳转" class="headerlink" title="变形虫碰撞(点击可以跳转)"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/309669#problem/C">变形虫碰撞(点击可以跳转)</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.DecimalFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//读取键盘输入</span></span><br><span class="line">        Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> num = scan.nextInt();</span><br><span class="line">        <span class="keyword">double</span>[] weight = <span class="keyword">new</span> <span class="keyword">double</span>[num];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">            weight[i] = scan.nextDouble();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//小到大排序</span></span><br><span class="line">        Arrays.sort(weight);</span><br><span class="line">        <span class="keyword">double</span> SumWeight=weight[weight.length-<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">        <span class="comment">//计算几何平均值</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = num-<span class="number">1</span>;i&gt;<span class="number">0</span>;i--)&#123;</span><br><span class="line">            <span class="keyword">double</span> sqrt = Math.sqrt(SumWeight*weight[i-<span class="number">1</span>]);</span><br><span class="line">            SumWeight=<span class="number">2</span> * sqrt;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//格式化输出</span></span><br><span class="line">        String parten = <span class="string">&quot;#0.000&quot;</span>;</span><br><span class="line">        DecimalFormat decimal = <span class="keyword">new</span> DecimalFormat(parten);</span><br><span class="line">        String reweight = decimal.format(SumWeight);</span><br><span class="line">        System.out.println(reweight);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="电话号码减法游戏"><a href="#电话号码减法游戏" class="headerlink" title="电话号码减法游戏"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/309669#problem/D">电话号码减法游戏</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> length = scan.nextInt();</span><br><span class="line">        <span class="keyword">int</span> num8 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> numOther = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        String TelPhoNum = scan.next().substring(<span class="number">0</span>,length-<span class="number">10</span>);</span><br><span class="line">        <span class="keyword">char</span>[] charTPN = TelPhoNum.toCharArray();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">char</span> a: charTPN) &#123;</span><br><span class="line">            String n = a+<span class="string">&quot;&quot;</span>;</span><br><span class="line">            <span class="keyword">int</span> b = Integer.parseInt(n);</span><br><span class="line">            <span class="keyword">if</span>(b==<span class="number">8</span>)&#123;</span><br><span class="line">                num8++;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                numOther++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(num8&gt;numOther)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;Yes&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;No&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="农场主安排奶牛工作"><a href="#农场主安排奶牛工作" class="headerlink" title="农场主安排奶牛工作"></a><a target="_blank" rel="noopener" href="https://vjudge.net/contest/309669#problem/B">农场主安排奶牛工作</a></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scan = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> cowNumber = scan.nextInt();</span><br><span class="line">        <span class="keyword">int</span> end=scan.nextInt();</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;Cow&gt; cow = <span class="keyword">new</span> ArrayList&lt;Cow&gt;(cowNumber);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cowNumber;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> a = scan.nextInt();</span><br><span class="line">            <span class="keyword">int</span> b = scan.nextInt();</span><br><span class="line">            Cow newcow = <span class="keyword">new</span> Cow(a,b);</span><br><span class="line">            cow.add(newcow);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> workCowNum=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> worktime=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> workstart = cow.get(<span class="number">0</span>).start;</span><br><span class="line">        <span class="keyword">int</span> workend = cow.get(<span class="number">0</span>).end;</span><br><span class="line">        <span class="keyword">boolean</span> iswork=<span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">boolean</span> isend=<span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cow.size();i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;cow.size();j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(cow.get(j).end&gt;=end)&#123;</span><br><span class="line">                    i=j;</span><br><span class="line">                    iswork = <span class="keyword">true</span>;</span><br><span class="line">                    isend = <span class="keyword">true</span>;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(workstart&lt;=cow.get(j).start&amp;&amp;workend&gt;=cow.get(j).end)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(worktime&lt;=cow.get(j).end-workend) &#123;</span><br><span class="line">                        iswork=<span class="keyword">true</span>;</span><br><span class="line">                        i=j;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(iswork)&#123;</span><br><span class="line">                workstart = workend;</span><br><span class="line">                workend = cow.get(i).end;</span><br><span class="line">                worktime = cow.get(i).end - workend;</span><br><span class="line">                workCowNum++;</span><br><span class="line">                iswork = <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(isend)&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(workCowNum+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cow</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> start;</span><br><span class="line">    <span class="keyword">int</span> end;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Cow</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.start = a;</span><br><span class="line">        <span class="keyword">this</span>.end = b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://createj.github.io/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jamie">
+      <meta itemprop="description" content="一个头秃前端程序员的学习进阶之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time-Traveler">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">JamieW的blog搭建全过程（1）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-12 00:03:18" itemprop="dateCreated datePublished" datetime="2020-09-12T00:03:18+08:00">2020-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-16 15:15:38" itemprop="dateModified" datetime="2020-09-16T15:15:38+08:00">2020-09-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BB%BA%E7%AB%99%E5%85%A8%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">建站全过程记录</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>现在各个博客平台，要么免费有广告，要么就收费，让喜欢当白嫖党的我们烦躁不已。所以，想不想拥有一个炫酷的个人博客来展示自己呢？本文将为你介绍如何从头搭建一个hexo个人博客（完全免费的噢！）。</p>
+<p>博客架构： hexo+gitee page/github page</p>
+<h1 id="1-工具准备"><a href="#1-工具准备" class="headerlink" title="1.工具准备"></a>1.工具准备</h1><h2 id="1-下载Git"><a href="#1-下载Git" class="headerlink" title="1.下载Git"></a>1.下载Git</h2><p>下载<a target="_blank" rel="noopener" href="https://gitforwindows.org/">Git</a>,安装一路next</p>
+<h2 id="2-下载Node-js"><a href="#2-下载Node-js" class="headerlink" title="2.下载Node.js"></a>2.下载Node.js</h2><p>下载<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">Node.js</a>,安装一路next</p>
+<h2 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 安装指令</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line">&#x2F;&#x2F; 检验指令</span><br><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-搭建hexo"><a href="#2-搭建hexo" class="headerlink" title="2.搭建hexo"></a>2.搭建hexo</h1><h2 id="1-创建"><a href="#1-创建" class="headerlink" title="1.创建"></a>1.创建</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init yourBlogName</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-使用"><a href="#2-使用" class="headerlink" title="2.使用"></a>2.使用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就可以访问<a target="_blank" rel="noopener" href="http://localhost:4000/">hexo主页</a>了，是不是很惊喜！</p>
+<h2 id="3-安装deploy-git工具"><a href="#3-安装deploy-git工具" class="headerlink" title="3.安装deploy-git工具"></a>3.安装deploy-git工具</h2><p>这个是为了我们后面上传到gitee做准备</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-重新渲染"><a href="#4-重新渲染" class="headerlink" title="4.重新渲染"></a>4.重新渲染</h2><p>在我们对hexo的配置或者是内容修改后，都需要进行重新构建，这两个命令会经常用到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-同步到gitee和github"><a href="#3-同步到gitee和github" class="headerlink" title="3.同步到gitee和github"></a>3.同步到gitee和github</h1><h2 id="1-gitee"><a href="#1-gitee" class="headerlink" title="1.gitee"></a>1.gitee</h2><h3 id="1-注册账号"><a href="#1-注册账号" class="headerlink" title="1.注册账号"></a>1.注册账号</h3><p>自己操作</p>
+<h3 id="2-创建仓库"><a href="#2-创建仓库" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h3><h4 id="1-找到自己的id"><a href="#1-找到自己的id" class="headerlink" title="1.找到自己的id"></a>1.找到自己的id</h4><p>查看自己的地址栏，gitee.com后面带的就是你的id了</p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912103726726.png" alt="image-20200912103726726"></p>
+<p>tips：可以给自己起一个好听的英文名字，然后在个人信息中替换掉，以后你把网站给别人的时候，别人看到你的网站名字才足够优雅！</p>
+<h4 id="2-创建仓库-1"><a href="#2-创建仓库-1" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h4><p>右上角加号创建仓库</p>
+<p>仓库名字就填你的id，一摸一样就可以</p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912103936682.png" alt="image-20200912103936682"></p>
+<p>因为我已经创建过了，所以存在，下方的选项自己看情况勾选</p>
+<h3 id="3-同步"><a href="#3-同步" class="headerlink" title="3.同步"></a>3.同步</h3><h4 id="1-复制仓库地址"><a href="#1-复制仓库地址" class="headerlink" title="1.复制仓库地址"></a>1.复制仓库地址</h4><p>复制仓库地址</p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912104143145.png" alt="image-20200912104143145"></p>
+<p>打开你刚刚创建hexo的地方，找到<strong>_config.yml</strong>这个文件，使用记事本或者说<strong>sublime</strong>打开</p>
+<p>拉到最下面，将仓库地址填入repo关键字后面，注意冒号后面有一个空格，其余两个关键字跟我一样</p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912104439210.png" alt="image-20200912104439210"></p>
+<p>然后ctrl+F找到url，填写将来你生成出来的网站地址<strong><a target="_blank" rel="noopener" href="https://yourid.gitee.io/">https://yourId.gitee.io</a></strong>, 只有严格按照上面仓库命名才可以噢！</p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912111517557.png" alt="image-20200912111517557"></p>
+<h4 id="2-同步"><a href="#2-同步" class="headerlink" title="2.同步"></a>2.同步</h4><p>使用前面说的重新构建的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<p>这个时候会要求你输入gitee的账号密码，输入之后即可上传到你所创建的仓库内</p>
+<p>配置<strong>ssh密钥</strong>可以免密码输入，具体百度，本文不过多介绍</p>
+<h4 id="3-部署Gitee-Pages"><a href="#3-部署Gitee-Pages" class="headerlink" title="3.部署Gitee Pages"></a>3.部署Gitee Pages</h4><p>点击</p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200912105353806.png" alt="image-20200912105353806"></p>
+<p>勾选强制使用https</p>
+<p>点击<strong>部署or更新</strong></p>
+<p>注意，以后每一次上传完文章都要来这里点击更新（这个是相对于github不好的地方，可是谁叫它加载快呢！只能是含泪接受它的缺点了）</p>
+<h3 id="4-体验"><a href="#4-体验" class="headerlink" title="4.体验"></a>4.体验</h3><p>在地址栏输入 yourGiteeName.gitee.io即可访问你的hexo博客啦！</p>
+<h2 id="2-github"><a href="#2-github" class="headerlink" title="2.github"></a>2.github</h2><h3 id="1-注册账号-1"><a href="#1-注册账号-1" class="headerlink" title="1.注册账号"></a>1.注册账号</h3><p>自己操作</p>
+<h3 id="2-创建仓库-2"><a href="#2-创建仓库-2" class="headerlink" title="2.创建仓库"></a>2.创建仓库</h3><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916144148897.png" alt="image-20200916144148897"></p>
+<p>命名要跟自己的用户名一样，才能开启github page，一定要按照这个规则来噢！</p>
+<h3 id="3-同步-1"><a href="#3-同步-1" class="headerlink" title="3.同步"></a>3.同步</h3><h4 id="1-复制仓库地址-1"><a href="#1-复制仓库地址-1" class="headerlink" title="1.复制仓库地址"></a>1.复制仓库地址</h4><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916144315546.png" alt="image-20200916144315546"></p>
+<h4 id="2-同步-1"><a href="#2-同步-1" class="headerlink" title="2.同步"></a>2.同步</h4><p>将地址以下图形式粘贴到<strong>_config.yml</strong>文件中，并补充相应的内容</p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916144621858.png" alt="image-20200916144621858"></p>
+<p>然后将<a target="_blank" rel="noopener" href="https://yourgithubname.github.io粘贴到以下位置/">https://yourGithubName.github.io粘贴到以下位置</a></p>
+<p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916153033453.png" alt="image-20200916153033453"></p>
+<h4 id="3-部署到github-page"><a href="#3-部署到github-page" class="headerlink" title="3.部署到github page"></a>3.部署到github page</h4><p>保存_config.yml文件</p>
+<p>执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+
+<p>部署这一步是github自动的，比gitee要优秀的多</p>
+<h3 id="4-体验-1"><a href="#4-体验-1" class="headerlink" title="4.体验"></a>4.体验</h3><p>这个时候在地址栏输入yourGithubName.github.io即可访问你的hexo博客啦！</p>
+<h1 id="Github-io访问被拒解决方法（逐步更新）"><a href="#Github-io访问被拒解决方法（逐步更新）" class="headerlink" title="Github.io访问被拒解决方法（逐步更新）"></a>Github.io访问被拒解决方法（逐步更新）</h1><h2 id="1-修改host文件"><a href="#1-修改host文件" class="headerlink" title="1.修改host文件"></a>1.修改host文件</h2><p>一般在路径<strong>C:\Windows\System32\drivers\etc</strong>下，正常情况下没办法直接修改host文件，可以复制出来，然后修改完在复制回去，然后确认管理员权限即可</p>
+<h3 id="1-点击这里跳转查看github-com的ip地址"><a href="#1-点击这里跳转查看github-com的ip地址" class="headerlink" title="1.点击这里跳转查看github.com的ip地址"></a>1.<a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/">点击这里</a>跳转查看<strong>github.com</strong>的ip地址</h3><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916145734151.png" alt="image-20200916145734151"></p>
+<h3 id="2-点击这里查看github-global-ssl-fastly-net的ip地址"><a href="#2-点击这里查看github-global-ssl-fastly-net的ip地址" class="headerlink" title="2.点击这里查看github.global.ssl.fastly.net的ip地址"></a>2.<a target="_blank" rel="noopener" href="https://fastly.net.ipaddress.com/github.global.ssl.fastly.net">点击这里</a>查看<strong>github.global.ssl.fastly.net</strong>的ip地址</h3><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916145953466.png" alt="image-20200916145953466"></p>
+<h3 id="3-点击这里查看github-io的ip地址"><a href="#3-点击这里查看github-io的ip地址" class="headerlink" title="3.点击这里查看github.io的ip地址"></a>3.<a target="_blank" rel="noopener" href="https://github.com.ipaddress.com/assets-cdn.github.com">点击这里</a>查看github.io的ip地址</h3><p><img src="/2020/09/12/JamieW%E7%9A%84blog%E6%90%AD%E5%BB%BA%E5%85%A8%E8%BF%87%E7%A8%8B/image-20200916150028081.png" alt="image-20200916150028081"></p>
+<p>最后，按照以下格式添加到host文件的最后面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">140.82.114.3 github.com</span><br><span class="line">199.232.69.194 github.global.ssl.fastly.net</span><br><span class="line"></span><br><span class="line">185.199.108.153 github.github.io</span><br><span class="line">185.199.109.153 github.github.io</span><br><span class="line">185.199.110.153 github.github.io</span><br><span class="line">185.199.111.153 github.github.io</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-修改DNS地址"><a href="#2-修改DNS地址" class="headerlink" title="2.修改DNS地址"></a>2.修改DNS地址</h2><p>将ipv4协议的DNS解析地址修改为114.114.114.114</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://createj.github.io/2020/09/10/Javascript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A1-%E6%A0%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jamie">
+      <meta itemprop="description" content="一个头秃前端程序员的学习进阶之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time-Traveler">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/10/Javascript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A1-%E6%A0%88/" class="post-title-link" itemprop="url">Javascript数据结构：1.栈</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-10 17:18:25" itemprop="dateCreated datePublished" datetime="2020-09-10T17:18:25+08:00">2020-09-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-09-12 21:53:07" itemprop="dateModified" datetime="2020-09-12T21:53:07+08:00">2020-09-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Javascript%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">Javascript数据结构</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id><a href="#" class="headerlink" title></a></h1><h2 id="1-特点"><a href="#1-特点" class="headerlink" title="1.特点"></a>1.特点</h2><p>后进先出、受限制的线性结构</p>
+<h2 id="2-实现"><a href="#2-实现" class="headerlink" title="2.实现"></a>2.实现</h2><p>通过js的数组，能够轻松完成封装其所有基本功能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Stack</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.items = [];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1、入栈</span></span><br><span class="line">    Stack.prototype.push = <span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.items.push(element);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 2、出栈</span></span><br><span class="line">    Stack.prototype.pop = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.items.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 3、查看栈顶元素</span></span><br><span class="line">    Stack.prototype.peek = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.items.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 4、判断栈是否为空</span></span><br><span class="line">    Stack.prototype.isEmpty = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.items.length == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 5、获取栈中元素的数量</span></span><br><span class="line">    Stack.prototype.size = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.items.length;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 6、toString方法</span></span><br><span class="line">    Stack.prototype.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> resultString = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">this</span>.items.length; i++)&#123;</span><br><span class="line">            resultString += <span class="built_in">this</span>.items[i] + <span class="string">&#x27; &#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> resultString;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-实际应用"><a href="#3-实际应用" class="headerlink" title="3.实际应用"></a>3.实际应用</h2><h3 id="1-leetcodeT504"><a href="#1-leetcodeT504" class="headerlink" title="1.leetcodeT504"></a>1.leetcodeT504</h3><p><strong>问题描述：</strong></p>
+<p>给定一个整数，将其转化为7进制，并以字符串形式输出。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: 100</span><br><span class="line">输出: &quot;202&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: -7</span><br><span class="line">输出: &quot;-10&quot;</span><br></pre></td></tr></table></figure>
+
+<p><strong>代码</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> convertToBase7 = <span class="function"><span class="keyword">function</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = num;</span><br><span class="line">    <span class="keyword">var</span> arr = [];</span><br><span class="line">    <span class="keyword">var</span> isFu = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(a &lt; <span class="number">0</span>)&#123; 		<span class="comment">//考虑需要转换的数字小于0的情况</span></span><br><span class="line">        isFu = <span class="literal">true</span>;	<span class="comment">//直接将其转换成正数</span></span><br><span class="line">        a = a * <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(a == <span class="number">0</span>)&#123;		<span class="comment">//考虑需要转换的数字等于0的情况</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(a != <span class="number">0</span>)&#123;	</span><br><span class="line">        arr.push(a % <span class="number">7</span>);</span><br><span class="line">        a = <span class="built_in">Math</span>.floor(a / <span class="number">7</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> resultStr = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = arr.length<span class="number">-1</span>; i &gt;= <span class="number">0</span> ; i--)&#123;</span><br><span class="line">        resultStr += arr[i]+<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(isFu)&#123;		<span class="comment">//转换完成之后如果之前为负数，则在前面加上‘-’号</span></span><br><span class="line">        resultStr = <span class="string">&#x27;-&#x27;</span> + resultStr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> resultStr;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://createj.github.io/2020/09/10/vue-router/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -432,20 +1068,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -472,11 +1108,13 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Jamie</span>
+  <img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">粤ICP备20068883号</a>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
   </div>

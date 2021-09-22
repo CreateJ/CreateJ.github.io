@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"createj.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="01-let和const01-共同特点01-块级作用域 02-没有声明提升 03-不允许重复声明 02-const特有特点01-声明不可变常量 02-不可变只针对简单的常量，复合常量只是表示指向的地址值不会变，但是内部的属性无法控制不变（const声明的对象和数组可以在后续进行相应的修改） 02-变量的解构01-数组解构（按照顺序）1let [a, b, c] &#x3D; [1, 2, 3];  02-对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Time-Traveler">
+<meta property="og:url" content="https://createj.github.io/2021/04/10/es6/index.html">
+<meta property="og:site_name" content="Time-Traveler">
+<meta property="og:description" content="01-let和const01-共同特点01-块级作用域 02-没有声明提升 03-不允许重复声明 02-const特有特点01-声明不可变常量 02-不可变只针对简单的常量，复合常量只是表示指向的地址值不会变，但是内部的属性无法控制不变（const声明的对象和数组可以在后续进行相应的修改） 02-变量的解构01-数组解构（按照顺序）1let [a, b, c] &#x3D; [1, 2, 3];  02-对">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-04-10T03:21:02.088Z">
+<meta property="article:modified_time" content="2020-11-25T01:22:00.000Z">
+<meta property="article:author" content="Jamie">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://createj.github.io/2021/04/10/es6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Time-Traveler</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Time-Traveler</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">时光旅人，向往美好</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://createj.github.io/2021/04/10/es6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jamie">
+      <meta itemprop="description" content="一个头秃前端程序员的学习进阶之路">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Time-Traveler">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-10 11:21:02" itemprop="dateCreated datePublished" datetime="2021-04-10T11:21:02+08:00">2021-04-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-25 09:22:00" itemprop="dateModified" datetime="2020-11-25T09:22:00+08:00">2020-11-25</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="01-let和const"><a href="#01-let和const" class="headerlink" title="01-let和const"></a>01-let和const</h1><h2 id="01-共同特点"><a href="#01-共同特点" class="headerlink" title="01-共同特点"></a>01-共同特点</h2><p>01-块级作用域</p>
+<p>02-没有声明提升</p>
+<p>03-不允许重复声明</p>
+<h2 id="02-const特有特点"><a href="#02-const特有特点" class="headerlink" title="02-const特有特点"></a>02-const特有特点</h2><p>01-声明不可变常量</p>
+<p>02-不可变只针对简单的常量，复合常量只是表示指向的地址值不会变，但是内部的属性无法控制不变（const声明的对象和数组可以在后续进行相应的修改）</p>
+<h1 id="02-变量的解构"><a href="#02-变量的解构" class="headerlink" title="02-变量的解构"></a>02-变量的解构</h1><h2 id="01-数组解构（按照顺序）"><a href="#01-数组解构（按照顺序）" class="headerlink" title="01-数组解构（按照顺序）"></a>01-数组解构（按照顺序）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c] = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<h2 id="02-对象解构（按照属性名）"><a href="#02-对象解构（按照属性名）" class="headerlink" title="02-对象解构（按照属性名）"></a>02-对象解构（按照属性名）</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123; bar, foo &#125; = &#123; <span class="attr">foo</span>: <span class="string">&#x27;aaa&#x27;</span>, <span class="attr">bar</span>: <span class="string">&#x27;bbb&#x27;</span> &#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="03-默认值"><a href="#03-默认值" class="headerlink" title="03-默认值"></a>03-默认值</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> [a, b, c = <span class="number">3</span>] = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">c <span class="comment">//3</span></span><br></pre></td></tr></table></figure>
+
+<p>可以用于解构嵌套变量（如套娃json对象）</p>
+<h2 id="04-函数参数的结构赋值"><a href="#04-函数参数的结构赋值" class="headerlink" title="04-函数参数的结构赋值"></a>04-函数参数的结构赋值</h2><p>按照传入参数的类型自行解构，解构失败使用默认值</p>
+<h2 id="05-圆括号慎用"><a href="#05-圆括号慎用" class="headerlink" title="05-圆括号慎用"></a>05-圆括号慎用</h2><p>等用到回来查</p>
+<h1 id="03-字符串扩展"><a href="#03-字符串扩展" class="headerlink" title="03-字符串扩展"></a>03-字符串扩展</h1><h2 id="01-for…of…遍历字符串内的每一个字符"><a href="#01-for…of…遍历字符串内的每一个字符" class="headerlink" title="01-for…of…遍历字符串内的每一个字符"></a>01-for…of…遍历字符串内的每一个字符</h2><h2 id="02-unicode支持"><a href="#02-unicode支持" class="headerlink" title="02-unicode支持"></a>02-unicode支持</h2><h2 id="03-模板语法"><a href="#03-模板语法" class="headerlink" title="03-模板语法"></a>03-模板语法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`/*模板内容*/`</span></span><br></pre></td></tr></table></figure>
+
+<p>可能会涉及&lt;%%&gt;转换问题，可以提前使用正则表达式解决</p>
+<h1 id="04-字符串新增方法"><a href="#04-字符串新增方法" class="headerlink" title="04-字符串新增方法"></a>04-字符串新增方法</h1><h2 id="01-String-fromCodePoint"><a href="#01-String-fromCodePoint" class="headerlink" title="01-String.fromCodePoint()"></a>01-String.fromCodePoint()</h2><p>正确返回Unicode码点对应的字符</p>
+<h2 id="02-String-raw"><a href="#02-String-raw" class="headerlink" title="02-String.raw()"></a>02-String.raw()</h2><p>生成一个把单斜杠变成双斜杠的字符换，常用语模板语法</p>
+<h2 id="03-codePointAt"><a href="#03-codePointAt" class="headerlink" title="03-codePointAt()"></a>03-codePointAt()</h2><p>获得字符串某个下表字符的码点</p>
+<h2 id="04-normalize"><a href="#04-normalize" class="headerlink" title="04-normalize()"></a>04-normalize()</h2><p>字符合成相关</p>
+<h2 id="05-includes-startsWith-，endsWith"><a href="#05-includes-startsWith-，endsWith" class="headerlink" title="05-includes(), startsWith() ，endsWith()"></a>05-includes(), startsWith() ，endsWith()</h2><p>includes()是否包含, 第二个参数表示从第n个到结束</p>
+<p>startsWith()是否开始于头部, 第二个参数表示从第n个到结束</p>
+<p>endsWith()是否结束于尾部，第二个参数表示从开头到第n个，不包含</p>
+<h2 id="06-repeat"><a href="#06-repeat" class="headerlink" title="06-repeat()"></a>06-repeat()</h2><p>返回调用该方法的字符串重复n次之后的字符串</p>
+<h2 id="07-padStart-padEnd"><a href="#07-padStart-padEnd" class="headerlink" title="07-padStart(),padEnd()"></a>07-padStart(),padEnd()</h2><p>第一个参数表示规定的字符串长度</p>
+<p>第二个参数表示用什么来补全</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;x&#x27;</span>.padStart(<span class="number">5</span>, <span class="string">&#x27;ab&#x27;</span>) <span class="comment">// &#x27;ababx&#x27;</span></span><br><span class="line"><span class="string">&#x27;x&#x27;</span>.padStart(<span class="number">4</span>, <span class="string">&#x27;ab&#x27;</span>) <span class="comment">// &#x27;abax&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;x&#x27;</span>.padEnd(<span class="number">5</span>, <span class="string">&#x27;ab&#x27;</span>) <span class="comment">// &#x27;xabab&#x27;</span></span><br><span class="line"><span class="string">&#x27;x&#x27;</span>.padEnd(<span class="number">4</span>, <span class="string">&#x27;ab&#x27;</span>) <span class="comment">// &#x27;xaba&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="08-trimStart-，trimEnd"><a href="#08-trimStart-，trimEnd" class="headerlink" title="08-trimStart()，trimEnd()"></a>08-trimStart()，trimEnd()</h2><p>消除字符串前后的空格</p>
+<h2 id="09-matchAll"><a href="#09-matchAll" class="headerlink" title="09-matchAll()"></a>09-matchAll()</h2><p>返回一个正则表达式在当前字符串的所有匹配</p>
+<h1 id="05-正则扩展"><a href="#05-正则扩展" class="headerlink" title="05-正则扩展"></a>05-正则扩展</h1><p>跳过</p>
+<h1 id="06-数值扩展"><a href="#06-数值扩展" class="headerlink" title="06-数值扩展"></a>06-数值扩展</h1><h2 id="01-二进制和八进制表示法"><a href="#01-二进制和八进制表示法" class="headerlink" title="01-二进制和八进制表示法"></a>01-二进制和八进制表示法</h2><p>使用0b或者0B表示二进制前缀</p>
+<p>使用0o或者0O表示八进制前缀</p>
+<h2 id="02-Number-isFinite-Number-isNaN"><a href="#02-Number-isFinite-Number-isNaN" class="headerlink" title="02-Number.isFinite(), Number.isNaN()"></a>02-Number.isFinite(), Number.isNaN()</h2><p>检测是否有限，是否为NaN</p>
+<h2 id="03-Number-parseInt-Number-parseFloat"><a href="#03-Number-parseInt-Number-parseFloat" class="headerlink" title="03-Number.parseInt(), Number.parseFloat()"></a>03-Number.parseInt(), Number.parseFloat()</h2><h2 id="04-Number-isInteger"><a href="#04-Number-isInteger" class="headerlink" title="04-Number.isInteger()"></a>04-Number.isInteger()</h2><p>判断是否整数</p>
+<p>对精度要求高不要使用</p>
+<h2 id="05-Number-EPSILON"><a href="#05-Number-EPSILON" class="headerlink" title="05-Number.EPSILON()"></a>05-Number.EPSILON()</h2><p>用于提供一个js能够识别的最小精度数字</p>
+<p>用于解决类似0.1+0.2！==0.3的问题 </p>
+<h2 id="06-安全整数和-Number-isSafeInteger"><a href="#06-安全整数和-Number-isSafeInteger" class="headerlink" title="06-安全整数和 Number.isSafeInteger()"></a>06-安全整数和 Number.isSafeInteger()</h2><p>判断是否安全整数</p>
+<p>安全整数：整数范围在<code>-2^53</code>到<code>2^53</code>之间（不含两个端点）的数</p>
+<h2 id="07-Math对象扩展"><a href="#07-Math对象扩展" class="headerlink" title="07-Math对象扩展"></a>07-Math对象扩展</h2><h3 id="01-Math-trunc"><a href="#01-Math-trunc" class="headerlink" title="01-Math.trunc()"></a>01-Math.trunc()</h3><p>去除小数部分，如4.5=》4，-4.5=》-4</p>
+<h3 id="02-Math-sign"><a href="#02-Math-sign" class="headerlink" title="02-Math.sign()"></a>02-Math.sign()</h3><p>判断是正数负数还是零，返回值为+1，-1，0，NaN</p>
+<h3 id="03-Math-cbrt"><a href="#03-Math-cbrt" class="headerlink" title="03-Math.cbrt()"></a>03-Math.cbrt()</h3><p>计算立方根</p>
+<h3 id="04-Math-clz32"><a href="#04-Math-clz32" class="headerlink" title="04-Math.clz32()"></a>04-Math.clz32()</h3><p>转换为32位无符号整数</p>
+<h3 id="05-Math-imul"><a href="#05-Math-imul" class="headerlink" title="05-Math.imul()"></a>05-Math.imul()</h3><p>返回两个有符号32位整数相乘的结果</p>
+<p>相对于a*b，优点在于溢出的时候可以正确返回低位的数值</p>
+<h3 id="06-Math-fround"><a href="#06-Math-fround" class="headerlink" title="06-Math.fround()"></a>06-Math.fround()</h3><p>将64位双精度浮点数转换为32位单精度浮点数</p>
+<h3 id="07-Math-hypot"><a href="#07-Math-hypot" class="headerlink" title="07-Math.hypot()"></a>07-Math.hypot()</h3><p>返回所有参数的平方和的平方根</p>
+<h3 id="08-对数方法（略）"><a href="#08-对数方法（略）" class="headerlink" title="08-对数方法（略）"></a>08-对数方法（略）</h3><h3 id="09-双曲函数方法（略）"><a href="#09-双曲函数方法（略）" class="headerlink" title="09-双曲函数方法（略）"></a>09-双曲函数方法（略）</h3><h3 id="08-指数运算符"><a href="#08-指数运算符" class="headerlink" title="08-指数运算符"></a>08-指数运算符</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>**<span class="number">3</span>=<span class="number">8</span></span><br><span class="line"><span class="number">2</span>**<span class="number">2</span>=<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="09-BigInt数据类型"><a href="#09-BigInt数据类型" class="headerlink" title="09-BigInt数据类型"></a>09-BigInt数据类型</h3><p>没有位数限制，不会像普通数值一样丢失精度，但是只能保存整数</p>
+<p>表示方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">123456789123456n</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="07-函数扩展"><a href="#07-函数扩展" class="headerlink" title="07-函数扩展"></a>07-函数扩展</h1><h2 id="01-函数参数默认值"><a href="#01-函数参数默认值" class="headerlink" title="01-函数参数默认值"></a>01-函数参数默认值</h2><h3 id="01-基本用法"><a href="#01-基本用法" class="headerlink" title="01-基本用法"></a>01-基本用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">log</span>(<span class="params">x, y = <span class="string">&#x27;World&#x27;</span></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(x, y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="02-可以与解构赋值语法一起使用"><a href="#02-可以与解构赋值语法一起使用" class="headerlink" title="02-可以与解构赋值语法一起使用"></a>02-可以与解构赋值语法一起使用</h3><p>详情看上方解构赋值语法</p>
+<h3 id="03-有默认值的参数应该放后面"><a href="#03-有默认值的参数应该放后面" class="headerlink" title="03-有默认值的参数应该放后面"></a>03-有默认值的参数应该放后面</h3><h3 id="04-length问题"><a href="#04-length问题" class="headerlink" title="04-length问题"></a>04-length问题</h3><p>函数的length函数会返回该函数的参数个数，使用默认值会使计数粗线问题，返回0</p>
+<h3 id="05-作用域"><a href="#05-作用域" class="headerlink" title="05-作用域"></a>05-作用域</h3><p>参数使用默认值时，参数会自己形成一个作用域，先在当前作用域内找变量，再找外部变量</p>
+<h3 id="06-应用"><a href="#06-应用" class="headerlink" title="06-应用"></a>06-应用</h3><p>可用于参数不得省略，用到再查</p>
+<h2 id="02-rest参数"><a href="#02-rest参数" class="headerlink" title="02-rest参数"></a>02-rest参数</h2><h3 id="01-用法"><a href="#01-用法" class="headerlink" title="01-用法"></a>01-用法</h3><p>用于收集多余的参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">...values</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> val <span class="keyword">of</span> values) &#123;</span><br><span class="line">    sum += val;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line">add(<span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span>) <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+
+<p>这个写法可以收集任意数量的参数，并进行数据运算</p>
+<p>与arguments的区别，arguments是一个类似于数组的对象，但不是数组，想要使用数组的方法需要进行<strong>Array.prototype.slice.call</strong>进行转换才能使用数组方法</p>
+<h3 id="02-rest参数只能是最后一个参数"><a href="#02-rest参数只能是最后一个参数" class="headerlink" title="02-rest参数只能是最后一个参数"></a>02-rest参数只能是最后一个参数</h3><h3 id="03-影响严格模式"><a href="#03-影响严格模式" class="headerlink" title="03-影响严格模式"></a>03-影响严格模式</h3><p>使用默认值、解构赋值、或者扩展运算符，函数内部不能显式设置严格模式，否则报错</p>
+<h2 id="03-箭头函数"><a href="#03-箭头函数" class="headerlink" title="03-箭头函数"></a>03-箭头函数</h2><h3 id="01-简单使用"><a href="#01-简单使用" class="headerlink" title="01-简单使用"></a>01-简单使用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="params">v</span> =&gt;</span> v;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> v;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="02-多个参数"><a href="#02-多个参数" class="headerlink" title="02-多个参数"></a>02-多个参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sum = <span class="function">(<span class="params">num1, num2</span>) =&gt;</span> &#123; <span class="keyword">return</span> num1 + num2; &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="03-如果返回的参数是对象"><a href="#03-如果返回的参数是对象" class="headerlink" title="03-如果返回的参数是对象"></a>03-如果返回的参数是对象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> getTempItem = <span class="function"><span class="params">id</span> =&gt;</span> (&#123; <span class="attr">id</span>: id, <span class="attr">name</span>: <span class="string">&quot;Temp&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="04-注意点"><a href="#04-注意点" class="headerlink" title="04-注意点"></a>04-注意点</h3><ol>
+<li>this的指向问题，是指向定义时所在的对象，而不是使用时所在的对象</li>
+<li>不可以当做构造函数</li>
+<li>不可以使用arguments对象</li>
+<li>不可以使用yield命令（这个命令没见过不知道做啥的，以后补充）</li>
+</ol>
+<h3 id="05-优点"><a href="#05-优点" class="headerlink" title="05-优点"></a>05-优点</h3><p>可以用来封装回调函数，这样this只会指向创建他的对象，因此在外部调用这个方法的时候，不会因为this指向document而导致程序出错</p>
+<p><strong>这个优点同时也是缺点</strong></p>
+<p>当this需要动态变化和定义对象方法的时候，使用箭头函数会固化this指向，导致无法正确执行函数</p>
+<h2 id="04-尾调用优化"><a href="#04-尾调用优化" class="headerlink" title="04-尾调用优化"></a>04-尾调用优化</h2><h3 id="01-尾调用实例"><a href="#01-尾调用实例" class="headerlink" title="01-尾调用实例"></a>01-尾调用实例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> g(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后一步调用另外一个函数，就是尾调用，只有像上面格式才是，其他无论长得多像都不是尾调用</p>
+<h3 id="02-尾调用的作用"><a href="#02-尾调用的作用" class="headerlink" title="02-尾调用的作用"></a>02-尾调用的作用</h3><p>在函数内调用另外一个函数的时候，需要保存父函数的作用域，存入到调用栈中，如果嵌套层数过多的话，会导致调用栈过于庞大，占用过多的内存。</p>
+<p>所以使用尾调用，因为已经没有别的可以执行了，所以系统可以放心的把外层的调用帧释放掉，只生成内层函数的调用帧。</p>
+<p>多使用尾调用，每次调用函数的调用帧就只有一层，可以大大节省内存空间</p>
+<h2 id="05-尾递归优化"><a href="#05-尾递归优化" class="headerlink" title="05-尾递归优化"></a>05-尾递归优化</h2><h3 id="01-尾递归"><a href="#01-尾递归" class="headerlink" title="01-尾递归"></a>01-尾递归</h3><p>最后一步调用自身</p>
+<h2 id="02-尾递归的作用"><a href="#02-尾递归的作用" class="headerlink" title="02-尾递归的作用"></a>02-尾递归的作用</h2><p>当运行一些需要递归多次的算法的时候，容易发生栈溢出，使用尾递归可以把上层调用栈释放掉，阻止了栈溢出。</p>
+<h1 id="08-数组扩展"><a href="#08-数组扩展" class="headerlink" title="08- 数组扩展"></a>08- 数组扩展</h1><h2 id="01-扩展运算符"><a href="#01-扩展运算符" class="headerlink" title="01-扩展运算符"></a>01-扩展运算符</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(...[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+<p>会将数组拆分为逗号相隔的参数序列</p>
+<h3 id="01-数组复制"><a href="#01-数组复制" class="headerlink" title="01-数组复制"></a>01-数组复制</h3><p>正常我们复制数组只是声明一个新的变量名，并让他指向旧数组的地址，使用旧变量名依然会影响新变量名。</p>
+<p>使用扩展运算符可以使用类似于解构的语法来进行深拷贝。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a1 = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="comment">// 写法一</span></span><br><span class="line"><span class="keyword">const</span> a2 = [...a1];</span><br><span class="line"><span class="comment">// 写法二</span></span><br><span class="line"><span class="keyword">const</span> [...a2] = a1;</span><br></pre></td></tr></table></figure>
+
+<h3 id="02-数组赋值"><a href="#02-数组赋值" class="headerlink" title="02-数组赋值"></a>02-数组赋值</h3><p>注意事项：用于数组赋值的时候，扩展运算符只能放在最后一步</p>
+<h3 id="03-拆分字符串"><a href="#03-拆分字符串" class="headerlink" title="03-拆分字符串"></a>03-拆分字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[...<span class="string">&#x27;hello&#x27;</span>]</span><br><span class="line"><span class="comment">// [ &quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot; ]</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="10-对象新增方法"><a href="#10-对象新增方法" class="headerlink" title="10-对象新增方法"></a>10-对象新增方法</h1><h2 id="03-Object-getOwnPropertyDescriptors"><a href="#03-Object-getOwnPropertyDescriptors" class="headerlink" title="03-Object.getOwnPropertyDescriptors()"></a>03-Object.getOwnPropertyDescriptors()</h2><h3 id="01-主要作用"><a href="#01-主要作用" class="headerlink" title="01-主要作用"></a>01-主要作用</h3><p>返回一个对象中所有的属性组合形成的对象，key为属性，value为该属性的描述对象，包括get&amp;set方法，writeable:是否可读写，configurable:能否修改访问器属性，enumerable:是否可以使用for in循环出来。</p>
+<h1 id="补充重新理解的点："><a href="#补充重新理解的点：" class="headerlink" title="补充重新理解的点："></a>补充重新理解的点：</h1><h2 id="01-call-和apply"><a href="#01-call-和apply" class="headerlink" title="01-call()和apply()"></a>01-call()和apply()</h2><p>主要作用都是改变this的指向</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A.call(B,arg1,arg2,arg3)</span><br><span class="line">A.apply(B,args)</span><br></pre></td></tr></table></figure>
+
+<p>以上都是使用A的方法，只不过this这个时候指向B</p>
+<p>可以理解为B使用了A的方法</p>
+<h2 id="02-get-amp-set方法"><a href="#02-get-amp-set方法" class="headerlink" title="02-get&amp;set方法"></a>02-get&amp;set方法</h2><p>类内部自带的方法，重写之后，涉及到属性的修改或者获取的操作时，会执行方法的逻辑</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Num</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(num) &#123;</span><br><span class="line">    <span class="built_in">this</span>._num = num;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span> <span class="title">num</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>._num;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> <span class="title">num</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>._num = num+<span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> test = <span class="keyword">new</span> Num(<span class="number">9</span>);</span><br><span class="line"><span class="built_in">console</span>.log(test.num); <span class="comment">//9</span></span><br><span class="line">test.num = <span class="number">99</span>;</span><br><span class="line"><span class="built_in">console</span>.log(test.num); <span class="comment">//100</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="有点难理解的点："><a href="#有点难理解的点：" class="headerlink" title="有点难理解的点："></a>有点难理解的点：</h1><p>箭头函数，this的指向问题</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/09/vue-vuex/" rel="prev" title="vue-vuex">
+      <i class="fa fa-chevron-left"></i> vue-vuex
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/26/TypeScript%E5%AD%A6%E4%B9%A0/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-let%E5%92%8Cconst"><span class="nav-number">1.</span> <span class="nav-text">01-let和const</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E5%85%B1%E5%90%8C%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">01-共同特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-const%E7%89%B9%E6%9C%89%E7%89%B9%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">02-const特有特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%A3%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">02-变量的解构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E6%95%B0%E7%BB%84%E8%A7%A3%E6%9E%84%EF%BC%88%E6%8C%89%E7%85%A7%E9%A1%BA%E5%BA%8F%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">01-数组解构（按照顺序）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%88%E6%8C%89%E7%85%A7%E5%B1%9E%E6%80%A7%E5%90%8D%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">02-对象解构（按照属性名）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">2.3.</span> <span class="nav-text">03-默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E7%9A%84%E7%BB%93%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">2.4.</span> <span class="nav-text">04-函数参数的结构赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-%E5%9C%86%E6%8B%AC%E5%8F%B7%E6%85%8E%E7%94%A8"><span class="nav-number">2.5.</span> <span class="nav-text">05-圆括号慎用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%A9%E5%B1%95"><span class="nav-number">3.</span> <span class="nav-text">03-字符串扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-for%E2%80%A6of%E2%80%A6%E9%81%8D%E5%8E%86%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%86%85%E7%9A%84%E6%AF%8F%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6"><span class="nav-number">3.1.</span> <span class="nav-text">01-for…of…遍历字符串内的每一个字符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-unicode%E6%94%AF%E6%8C%81"><span class="nav-number">3.2.</span> <span class="nav-text">02-unicode支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">03-模板语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">04-字符串新增方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-String-fromCodePoint"><span class="nav-number">4.1.</span> <span class="nav-text">01-String.fromCodePoint()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-String-raw"><span class="nav-number">4.2.</span> <span class="nav-text">02-String.raw()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-codePointAt"><span class="nav-number">4.3.</span> <span class="nav-text">03-codePointAt()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-normalize"><span class="nav-number">4.4.</span> <span class="nav-text">04-normalize()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-includes-startsWith-%EF%BC%8CendsWith"><span class="nav-number">4.5.</span> <span class="nav-text">05-includes(), startsWith() ，endsWith()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-repeat"><span class="nav-number">4.6.</span> <span class="nav-text">06-repeat()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#07-padStart-padEnd"><span class="nav-number">4.7.</span> <span class="nav-text">07-padStart(),padEnd()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#08-trimStart-%EF%BC%8CtrimEnd"><span class="nav-number">4.8.</span> <span class="nav-text">08-trimStart()，trimEnd()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#09-matchAll"><span class="nav-number">4.9.</span> <span class="nav-text">09-matchAll()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-%E6%AD%A3%E5%88%99%E6%89%A9%E5%B1%95"><span class="nav-number">5.</span> <span class="nav-text">05-正则扩展</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-%E6%95%B0%E5%80%BC%E6%89%A9%E5%B1%95"><span class="nav-number">6.</span> <span class="nav-text">06-数值扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%92%8C%E5%85%AB%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">01-二进制和八进制表示法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-Number-isFinite-Number-isNaN"><span class="nav-number">6.2.</span> <span class="nav-text">02-Number.isFinite(), Number.isNaN()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-Number-parseInt-Number-parseFloat"><span class="nav-number">6.3.</span> <span class="nav-text">03-Number.parseInt(), Number.parseFloat()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-Number-isInteger"><span class="nav-number">6.4.</span> <span class="nav-text">04-Number.isInteger()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-Number-EPSILON"><span class="nav-number">6.5.</span> <span class="nav-text">05-Number.EPSILON()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-%E5%AE%89%E5%85%A8%E6%95%B4%E6%95%B0%E5%92%8C-Number-isSafeInteger"><span class="nav-number">6.6.</span> <span class="nav-text">06-安全整数和 Number.isSafeInteger()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#07-Math%E5%AF%B9%E8%B1%A1%E6%89%A9%E5%B1%95"><span class="nav-number">6.7.</span> <span class="nav-text">07-Math对象扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-Math-trunc"><span class="nav-number">6.7.1.</span> <span class="nav-text">01-Math.trunc()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-Math-sign"><span class="nav-number">6.7.2.</span> <span class="nav-text">02-Math.sign()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-Math-cbrt"><span class="nav-number">6.7.3.</span> <span class="nav-text">03-Math.cbrt()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-Math-clz32"><span class="nav-number">6.7.4.</span> <span class="nav-text">04-Math.clz32()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-Math-imul"><span class="nav-number">6.7.5.</span> <span class="nav-text">05-Math.imul()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-Math-fround"><span class="nav-number">6.7.6.</span> <span class="nav-text">06-Math.fround()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07-Math-hypot"><span class="nav-number">6.7.7.</span> <span class="nav-text">07-Math.hypot()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08-%E5%AF%B9%E6%95%B0%E6%96%B9%E6%B3%95%EF%BC%88%E7%95%A5%EF%BC%89"><span class="nav-number">6.7.8.</span> <span class="nav-text">08-对数方法（略）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09-%E5%8F%8C%E6%9B%B2%E5%87%BD%E6%95%B0%E6%96%B9%E6%B3%95%EF%BC%88%E7%95%A5%EF%BC%89"><span class="nav-number">6.7.9.</span> <span class="nav-text">09-双曲函数方法（略）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08-%E6%8C%87%E6%95%B0%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">6.7.10.</span> <span class="nav-text">08-指数运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09-BigInt%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.7.11.</span> <span class="nav-text">09-BigInt数据类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#07-%E5%87%BD%E6%95%B0%E6%89%A9%E5%B1%95"><span class="nav-number">7.</span> <span class="nav-text">07-函数扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E9%BB%98%E8%AE%A4%E5%80%BC"><span class="nav-number">7.1.</span> <span class="nav-text">01-函数参数默认值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">7.1.1.</span> <span class="nav-text">01-基本用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-%E5%8F%AF%E4%BB%A5%E4%B8%8E%E8%A7%A3%E6%9E%84%E8%B5%8B%E5%80%BC%E8%AF%AD%E6%B3%95%E4%B8%80%E8%B5%B7%E4%BD%BF%E7%94%A8"><span class="nav-number">7.1.2.</span> <span class="nav-text">02-可以与解构赋值语法一起使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-%E6%9C%89%E9%BB%98%E8%AE%A4%E5%80%BC%E7%9A%84%E5%8F%82%E6%95%B0%E5%BA%94%E8%AF%A5%E6%94%BE%E5%90%8E%E9%9D%A2"><span class="nav-number">7.1.3.</span> <span class="nav-text">03-有默认值的参数应该放后面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-length%E9%97%AE%E9%A2%98"><span class="nav-number">7.1.4.</span> <span class="nav-text">04-length问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">7.1.5.</span> <span class="nav-text">05-作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-%E5%BA%94%E7%94%A8"><span class="nav-number">7.1.6.</span> <span class="nav-text">06-应用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-rest%E5%8F%82%E6%95%B0"><span class="nav-number">7.2.</span> <span class="nav-text">02-rest参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E7%94%A8%E6%B3%95"><span class="nav-number">7.2.1.</span> <span class="nav-text">01-用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-rest%E5%8F%82%E6%95%B0%E5%8F%AA%E8%83%BD%E6%98%AF%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-number">7.2.2.</span> <span class="nav-text">02-rest参数只能是最后一个参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-%E5%BD%B1%E5%93%8D%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.2.3.</span> <span class="nav-text">03-影响严格模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">7.3.</span> <span class="nav-text">03-箭头函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">7.3.1.</span> <span class="nav-text">01-简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-%E5%A4%9A%E4%B8%AA%E5%8F%82%E6%95%B0"><span class="nav-number">7.3.2.</span> <span class="nav-text">02-多个参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-%E5%A6%82%E6%9E%9C%E8%BF%94%E5%9B%9E%E7%9A%84%E5%8F%82%E6%95%B0%E6%98%AF%E5%AF%B9%E8%B1%A1"><span class="nav-number">7.3.3.</span> <span class="nav-text">03-如果返回的参数是对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">7.3.4.</span> <span class="nav-text">04-注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-%E4%BC%98%E7%82%B9"><span class="nav-number">7.3.5.</span> <span class="nav-text">05-优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-%E5%B0%BE%E8%B0%83%E7%94%A8%E4%BC%98%E5%8C%96"><span class="nav-number">7.4.</span> <span class="nav-text">04-尾调用优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E5%B0%BE%E8%B0%83%E7%94%A8%E5%AE%9E%E4%BE%8B"><span class="nav-number">7.4.1.</span> <span class="nav-text">01-尾调用实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-%E5%B0%BE%E8%B0%83%E7%94%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">7.4.2.</span> <span class="nav-text">02-尾调用的作用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-%E5%B0%BE%E9%80%92%E5%BD%92%E4%BC%98%E5%8C%96"><span class="nav-number">7.5.</span> <span class="nav-text">05-尾递归优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E5%B0%BE%E9%80%92%E5%BD%92"><span class="nav-number">7.5.1.</span> <span class="nav-text">01-尾递归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-%E5%B0%BE%E9%80%92%E5%BD%92%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">7.6.</span> <span class="nav-text">02-尾递归的作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#08-%E6%95%B0%E7%BB%84%E6%89%A9%E5%B1%95"><span class="nav-number">8.</span> <span class="nav-text">08- 数组扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">8.1.</span> <span class="nav-text">01-扩展运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E6%95%B0%E7%BB%84%E5%A4%8D%E5%88%B6"><span class="nav-number">8.1.1.</span> <span class="nav-text">01-数组复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-%E6%95%B0%E7%BB%84%E8%B5%8B%E5%80%BC"><span class="nav-number">8.1.2.</span> <span class="nav-text">02-数组赋值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-%E6%8B%86%E5%88%86%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">8.1.3.</span> <span class="nav-text">03-拆分字符串</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-%E5%AF%B9%E8%B1%A1%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95"><span class="nav-number">9.</span> <span class="nav-text">10-对象新增方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#03-Object-getOwnPropertyDescriptors"><span class="nav-number">9.1.</span> <span class="nav-text">03-Object.getOwnPropertyDescriptors()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-%E4%B8%BB%E8%A6%81%E4%BD%9C%E7%94%A8"><span class="nav-number">9.1.1.</span> <span class="nav-text">01-主要作用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E7%9A%84%E7%82%B9%EF%BC%9A"><span class="nav-number">10.</span> <span class="nav-text">补充重新理解的点：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-call-%E5%92%8Capply"><span class="nav-number">10.1.</span> <span class="nav-text">01-call()和apply()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-get-amp-set%E6%96%B9%E6%B3%95"><span class="nav-number">10.2.</span> <span class="nav-text">02-get&amp;set方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%89%E7%82%B9%E9%9A%BE%E7%90%86%E8%A7%A3%E7%9A%84%E7%82%B9%EF%BC%9A"><span class="nav-number">11.</span> <span class="nav-text">有点难理解的点：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jamie</p>
+  <div class="site-description" itemprop="description">一个头秃前端程序员的学习进阶之路</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jamie</span>
+  <img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">粤ICP备20068883号</a>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","model":{"jsonPath":"/live2dw/assets/haruto.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
